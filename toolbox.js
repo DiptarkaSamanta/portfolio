@@ -426,20 +426,27 @@ function syncGPS(e) {
 
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-
         const latDir = lat >= 0 ? 'N' : 'S';
         const lngDir = lng >= 0 ? 'E' : 'W';
+        const nameText = `My Location [${Math.abs(lat).toFixed(1)}°${latDir}, ${Math.abs(lng).toFixed(1)}°${lngDir}]`;
+
+        localStorage.setItem('userLat', lat.toString());
+        localStorage.setItem('userLng', lng.toString());
+        localStorage.setItem('userLocName', nameText);
+        localStorage.setItem('geolocationGranted', 'true');
+        localStorage.removeItem('geolocationDenied');
+
         if (locName) {
-          locName.textContent = `My Location [${Math.abs(lat).toFixed(1)}°${latDir}, ${Math.abs(lng).toFixed(1)}°${lngDir}]`;
+          locName.textContent = nameText;
         }
 
-        // Fetch real sunrise/sunset
         fetchSunriseSunset(lat, lng);
       },
       (error) => {
         if (icon) icon.classList.remove('spinning');
         if (gpsBtn) gpsBtn.disabled = false;
         if (locName) locName.textContent = "Location Denied";
+        localStorage.setItem('geolocationDenied', 'true');
         console.error(error);
       }
     );
@@ -1695,26 +1702,58 @@ function seekMusicTrack(percent) {
 }
 
 // Geolocation & Solar Time Fetcher
-function requestUserLocation() {
+function requestUserLocation(isUserInitiated = false) {
+  const savedLat = localStorage.getItem('userLat');
+  const savedLng = localStorage.getItem('userLng');
+  const savedLocName = localStorage.getItem('userLocName');
+
+  if (savedLat && savedLng) {
+    const lat = parseFloat(savedLat);
+    const lng = parseFloat(savedLng);
+
+    const locName = document.getElementById('weatherLocationName');
+    if (locName) {
+      locName.textContent = savedLocName || `My Location [${Math.abs(lat).toFixed(1)}°, ${Math.abs(lng).toFixed(1)}°]`;
+    }
+
+    fetchSunriseSunset(lat, lng);
+    return;
+  }
+
+  // If user denied previously and this isn't user-initiated, avoid browser popup
+  if (!isUserInitiated && localStorage.getItem('geolocationDenied') === 'true') {
+    autoAdjustTimeOfDayDefault();
+    return;
+  }
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
+        const latDir = lat >= 0 ? 'N' : 'S';
+        const lngDir = lng >= 0 ? 'E' : 'W';
+        const nameText = `My Location [${Math.abs(lat).toFixed(1)}°${latDir}, ${Math.abs(lng).toFixed(1)}°${lngDir}]`;
+
+        localStorage.setItem('userLat', lat.toString());
+        localStorage.setItem('userLng', lng.toString());
+        localStorage.setItem('userLocName', nameText);
+        localStorage.setItem('geolocationGranted', 'true');
+        localStorage.removeItem('geolocationDenied');
 
         const locName = document.getElementById('weatherLocationName');
         if (locName) {
-          const latDir = lat >= 0 ? 'N' : 'S';
-          const lngDir = lng >= 0 ? 'E' : 'W';
-          locName.textContent = `My Location [${Math.abs(lat).toFixed(1)}°${latDir}, ${Math.abs(lng).toFixed(1)}°${lngDir}]`;
+          locName.textContent = nameText;
         }
 
         fetchSunriseSunset(lat, lng);
       },
       (error) => {
         console.warn("Geolocation denied or unavailable, using system time:", error);
+        localStorage.setItem('geolocationDenied', 'true');
         autoAdjustTimeOfDayDefault();
-      }
+      },
+      { timeout: 8000 }
     );
   } else {
     autoAdjustTimeOfDayDefault();

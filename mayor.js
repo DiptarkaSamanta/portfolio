@@ -77,7 +77,7 @@ function toggleChat(forceState) {
 function showMayorResponse(triggerName) {
   if (triggerName === "welcome") {
     removeTypingIndicator();
-    
+
     // Add mayor speech bubble
     const msgDiv = document.createElement('div');
     msgDiv.className = 'chat-msg msg-mayor';
@@ -104,12 +104,12 @@ function addChoiceButtons(choices) {
   if (choices && choices.length > 0) {
     const choicesDiv = document.createElement('div');
     choicesDiv.className = 'msg-choices';
-    
+
     choices.forEach(choice => {
       const btn = document.createElement('button');
       btn.className = 'choice-btn';
       btn.textContent = choice.text;
-      
+
       if (choice.url) {
         btn.onclick = () => {
           window.location.href = choice.url;
@@ -164,7 +164,7 @@ function scrollToBottom() {
 }
 
 // Global accordion toggler
-window.toggleThoughtAccordion = function(headerElement) {
+window.toggleThoughtAccordion = function (headerElement) {
   const accordion = headerElement.closest('.thought-accordion');
   if (accordion) {
     accordion.classList.toggle('collapsed');
@@ -200,7 +200,7 @@ function parseMarkdown(text) {
 // Client Mayor Knowledge Engine for static hosting (e.g. GitHub Pages)
 function generateClientMayorResponse(userText) {
   const query = userText.toLowerCase();
-  
+
   if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('greetings') || query.includes('sir')) {
     return {
       text: "Greetings, traveler! I am the Mayor of Aethelgard. It is a pleasure to welcome you to our sovereign digital island. I oversee town operations on behalf of our **Artificial Intelligence & Machine Learning Engineer, Diptarka Samanta**.\n\nHow may I guide your journey today? You can explore our 9 island sectors or ask me about Diptarka's AI/ML engineering work!",
@@ -280,13 +280,12 @@ function generateClientMayorResponse(userText) {
   };
 }
 
-// Call dynamic LLM and stream tokens
-async function streamLLMResponse(userText) {
+// Process Mayor Response using Client Knowledge Engine (Optimized for Static & GitHub Pages)
+function streamLLMResponse(userText) {
   showTypingIndicator();
 
   conversationHistory.push({ role: 'user', content: userText });
 
-  // Prevent list from growing too large (retain system instruction + last 10 messages)
   if (conversationHistory.length > 12) {
     conversationHistory = [
       conversationHistory[0],
@@ -294,159 +293,24 @@ async function streamLLMResponse(userText) {
     ];
   }
 
-  // Set up UI components inside the response bubble
-  const mayorBubble = document.createElement('div');
-  mayorBubble.className = 'chat-msg msg-mayor';
-
-  const thoughtAccordion = document.createElement('div');
-  thoughtAccordion.className = 'thought-accordion thinking';
-  thoughtAccordion.style.display = 'none'; // hide until first reasoning token arrives
-  thoughtAccordion.innerHTML = `
-    <div class="thought-header" onclick="toggleThoughtAccordion(this)">
-      <div class="thought-title-wrapper">
-        <span class="thought-icon-gears">
-          <svg viewBox="0 0 24 24">
-            <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-          </svg>
-        </span>
-        <span class="thought-title-text">Thinking...</span>
-      </div>
-      <svg class="thought-chevron" viewBox="0 0 24 24">
-        <path d="M7 10l5 5 5-5z"/>
-      </svg>
-    </div>
-    <div class="thought-content"></div>
-  `;
-
-  const thoughtContentDiv = thoughtAccordion.querySelector('.thought-content');
-  const thoughtTitleText = thoughtAccordion.querySelector('.thought-title-text');
-
-  const replyContentDiv = document.createElement('div');
-  replyContentDiv.className = 'reply-content';
-
-  mayorBubble.appendChild(thoughtAccordion);
-  mayorBubble.appendChild(replyContentDiv);
-
-  let response;
-  try {
-    // Attempt local API proxy first (when python server.py is running)
-    response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: conversationHistory })
-    });
-    
-    if (!response.ok) {
-      throw new Error("Local proxy unavailable");
-    }
-  } catch (e) {
-    // Static hosting mode (GitHub Pages) without Python backend server
-    console.log("Static mode active: using Client Mayor Knowledge Engine");
+  // Brief typing delay for realistic interaction
+  setTimeout(() => {
     removeTypingIndicator();
-    
+
     const clientReply = generateClientMayorResponse(userText);
-    
+
     const clientMayorBubble = document.createElement('div');
     clientMayorBubble.className = 'chat-msg msg-mayor';
     clientMayorBubble.innerHTML = parseMarkdown(clientReply.text);
     chatBody.appendChild(clientMayorBubble);
-    
+
     if (clientReply.choices) {
       addChoiceButtons(clientReply.choices);
     }
-    
+
     scrollToBottom();
     conversationHistory.push({ role: 'assistant', content: clientReply.text });
-    return;
-  }
-
-  removeTypingIndicator();
-  chatBody.appendChild(mayorBubble);
-  scrollToBottom();
-
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder('utf-8');
-  let buffer = '';
-  let hasReasoning = false;
-  let currentReasoning = '';
-  let currentContent = '';
-  let isReasoningDone = false;
-
-  try {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop(); // save the partial line for the next iteration
-
-      for (const line of lines) {
-        const cleaned = line.trim();
-        if (!cleaned) continue;
-        if (cleaned === 'data: [DONE]') continue;
-
-        if (cleaned.startsWith('data: ')) {
-          try {
-            const json = JSON.parse(cleaned.substring(6));
-            if (!json.choices || json.choices.length === 0) continue;
-            
-            const delta = json.choices[0].delta;
-            const reasoning = delta.reasoning || delta.reasoning_content;
-            const content = delta.content;
-
-            if (reasoning) {
-              if (!hasReasoning) {
-                hasReasoning = true;
-                thoughtAccordion.style.display = 'block';
-              }
-              currentReasoning += reasoning;
-              thoughtContentDiv.textContent = currentReasoning;
-              scrollToBottom();
-            }
-
-            if (content) {
-              if (!isReasoningDone) {
-                isReasoningDone = true;
-                thoughtAccordion.classList.remove('thinking');
-                thoughtAccordion.classList.add('collapsed');
-                thoughtTitleText.textContent = "Thought Process";
-              }
-              currentContent += content;
-              replyContentDiv.innerHTML = parseMarkdown(currentContent);
-              scrollToBottom();
-            }
-          } catch (jsonErr) {
-            // Ignore partial/invalid json
-          }
-        }
-      }
-    }
-    
-    // Finished streaming
-    if (!hasReasoning) {
-      // If the model didn't stream any reasoning, remove the thought box entirely
-      thoughtAccordion.remove();
-    } else if (!isReasoningDone) {
-      // If we had reasoning but content transition wasn't triggered
-      thoughtAccordion.classList.remove('thinking');
-      thoughtAccordion.classList.add('collapsed');
-      thoughtTitleText.textContent = "Thought Process";
-    }
-
-    // Save reply to history
-    conversationHistory.push({ role: 'assistant', content: currentContent });
-
-    // Add navigation help buttons at the end
-    addChoiceButtons([
-      { text: "Show Main Menu", trigger: "welcome" }
-    ]);
-    scrollToBottom();
-
-  } catch (streamError) {
-    console.error("Stream reading error:", streamError);
-    replyContentDiv.innerHTML += "<br><br><em>[Stream connection lost]</em>";
-  }
+  }, 400);
 }
 
 // Send User Message

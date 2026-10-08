@@ -2457,6 +2457,37 @@
     }
 
     function locateUser(isUserInitiated = false) {
+      const savedLat = localStorage.getItem('userLat');
+      const savedLng = localStorage.getItem('userLng');
+
+      if (!isUserInitiated && savedLat && savedLng) {
+        const lat = parseFloat(savedLat);
+        const lng = parseFloat(savedLng);
+
+        if (userLocationMarker) {
+          userLocationMarker.remove();
+          markers = markers.filter(m => m !== userLocationMarker);
+        }
+
+        if (map) {
+          map.flyTo({
+            center: [lng, lat],
+            zoom: 12.5,
+            pitch: 45,
+            essential: true,
+            duration: 2500
+          });
+        }
+
+        addMarker(lng, lat, 'Your Location', true);
+        return;
+      }
+
+      if (!isUserInitiated && localStorage.getItem('geolocationDenied') === 'true') {
+        fallbackIPLocation(false);
+        return;
+      }
+
       if (!navigator.geolocation) {
         fallbackIPLocation(isUserInitiated);
         return;
@@ -2468,6 +2499,11 @@
         (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
+
+          localStorage.setItem('userLat', lat.toString());
+          localStorage.setItem('userLng', lng.toString());
+          localStorage.setItem('geolocationGranted', 'true');
+          localStorage.removeItem('geolocationDenied');
 
           if (userLocationMarker) {
             userLocationMarker.remove();
@@ -2489,6 +2525,7 @@
         },
         (error) => {
           console.warn('GPS location blocked or unavailable, switching to IP network location...', error);
+          localStorage.setItem('geolocationDenied', 'true');
           fallbackIPLocation(isUserInitiated);
         },
         { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }

@@ -421,8 +421,420 @@
       border-color: #c084fc;
     }
 
+
+    /* PujoPulse Pandal Hopper Box Styles */
+    .pujopulse-card {
+      padding: 24px;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      background: linear-gradient(145deg, rgba(32, 18, 8, 0.82), rgba(18, 9, 4, 0.9));
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pujopulse-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #ea580c, #ef4444, #fbbf24);
+    }
+    .pujopulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .pujopulse-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pujopulse-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fbbf24;
+    }
+    .pujopulse-badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .pujopulse-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b;
+      animation: pulseDotAmber 2s infinite;
+    }
+    @keyframes pulseDotAmber {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+    .pujopulse-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .pujopulse-spec-item {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .pujopulse-spec-label {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .pujopulse-spec-val {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .pujopulse-code-block {
+      background: #140b03;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #fde68a;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    .pujopulse-action-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(245, 158, 11, 0.55);
+      color: #fcd34d;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .pujopulse-action-btn:hover {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: #fbbf24;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+    }
+
+    /* PujoPulse Interactive Explorer Modal */
+    .pujo-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 7, 18, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    .pujo-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .pujo-modal-content {
+      background: linear-gradient(155deg, rgba(28, 15, 8, 0.96), rgba(14, 7, 3, 0.98));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(245, 158, 11, 0.25);
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .pujo-modal-overlay.active .pujo-modal-content {
+      transform: scale(1) translateY(0);
+    }
+    .pujo-modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #ea580c, #ef4444, #fbbf24);
+    }
+    .pujo-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .pujo-modal-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pujo-modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pujo-modal-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pujo-modal-close-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pujo-modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+    .pujo-modal-body {
+      padding: 22px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .pujo-circuit-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pujo-circuit-tab {
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pujo-circuit-tab:hover {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fde68a;
+    }
+    .pujo-circuit-tab.active {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: #f59e0b;
+      color: #fbbf24;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+    }
+    .pujo-pandal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pujo-pandal-item {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .pujo-pandal-item:hover {
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.05);
+      transform: translateX(4px);
+    }
+    .pujo-pandal-index {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pujo-pandal-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pujo-pandal-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #f8fafc;
+    }
+    .pujo-pandal-meta {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pujo-pandal-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pujo-pandal-status {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .pujo-wait-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 14px;
+      white-space: nowrap;
+    }
+    .pujo-wait-low {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .pujo-wait-med {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .pujo-wait-high {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .pujo-crowd-bar-bg {
+      width: 70px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .pujo-crowd-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+    .pujo-modal-footer {
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pujo-footer-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pujo-control-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .pujo-control-btn:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: #f59e0b;
+      color: #fbbf24;
+    }
+    .pujo-audio-btn.playing {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: #f59e0b;
+      color: #fbbf24;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+    @media (max-width: 650px) {
+      .pujo-pandal-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .pujo-pandal-status {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+
     @media (max-width: 768px) {
-      .microclog-spec-grid, .accessmeet-spec-grid, .cargopulse-spec-grid {
+      .microclog-spec-grid, .accessmeet-spec-grid, .cargopulse-spec-grid, .pujopulse-spec-grid {
         grid-template-columns: repeat(2, 1fr) !important;
       }
     }
@@ -596,6 +1008,7 @@
     .cal-dot.microclog { background: #22c55e; box-shadow: 0 0 5px #22c55e; }
     .cal-dot.senseconnect { background: #38bdf8; box-shadow: 0 0 5px #38bdf8; }
     .cal-dot.cargopulse { background: #c084fc; box-shadow: 0 0 5px #c084fc; }
+    .cal-dot.pujopulse { background: #f97316; box-shadow: 0 0 6px #f97316; }
     .cal-dot.system { background: #f59e0b; box-shadow: 0 0 5px #f59e0b; }
 
     /* Milestone details inspector panel */
@@ -629,6 +1042,7 @@
     .cal-tag-microclog { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
     .cal-tag-senseconnect { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
     .cal-tag-cargopulse { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+    .cal-tag-pujopulse { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.35); }
     .cal-tag-system { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
 
     .cal-inspector-title {
@@ -1244,6 +1658,80 @@
           </button>
         </div>
 
+        <!-- PujoPulse Live Pandal Hopping App Project Box -->
+        <div class="glass-panel pujopulse-card">
+          <div>
+            <div class="pujopulse-header">
+              <div class="pujopulse-title-group">
+                <div class="pujopulse-icon-box">
+                  <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;">
+                    <path d="M12 2c.5 2.5 2 4.5 2 6.5 0 2-1 3.5-2 3.5s-2-1.5-2-3.5c0-2 1.5-4 2-6.5z" fill="rgba(245, 158, 11, 0.4)"/>
+                    <path d="M4 14c0 4 3.5 7 8 7s8-3 8-7H4z"/>
+                    <line x1="2" y1="14" x2="22" y2="14"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-size: 0.72rem; font-weight: 700; color: #fbbf24; letter-spacing: 0.1em; text-transform: uppercase;">Festive Geo-Spatial &amp; Crowd Telemetry</div>
+                  <h3 style="font-size: 1.25rem; font-weight: 700; margin: 2px 0 0 0; color: #f8fafc;">PujoPulse: Pandal Hop AI</h3>
+                </div>
+              </div>
+              <div class="pujopulse-badge-live" id="pujopulseStatusBadge" title="Durga Puja Real-Time Pandal Navigation & Queue Engine">
+                <span class="pujopulse-status-dot"></span>
+                <span>Sharodotsav Mesh Live</span>
+              </div>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+              A high-concurrency urban crowd telemetry and dynamic route-planning platform engineered for Kolkata's Durga Puja. Integrates edge IoT crowd heatmaps, Dijkstra-based pedestrian rerouting, real-time pandal queue wait-time estimation, multi-modal transit coordination (Metro, auto-rickshaw feeder routes, walking corridors), and offline-first thematic pandal trails.
+            </p>
+
+            <div class="pujopulse-spec-grid">
+              <div class="pujopulse-spec-item">
+                <div class="pujopulse-spec-label">Pandals Mapped</div>
+                <div class="pujopulse-spec-val">450+ Geo-Fenced</div>
+              </div>
+              <div class="pujopulse-spec-item">
+                <div class="pujopulse-spec-label">Crowd Telemetry</div>
+                <div class="pujopulse-spec-val">&lt; 12s IoT Mesh</div>
+              </div>
+              <div class="pujopulse-spec-item">
+                <div class="pujopulse-spec-label">Wait Time AI</div>
+                <div class="pujopulse-spec-val">94.6% Acc.</div>
+              </div>
+              <div class="pujopulse-spec-item">
+                <div class="pujopulse-spec-label">Offline Engine</div>
+                <div class="pujopulse-spec-val">Vector / GeoJSON</div>
+              </div>
+            </div>
+
+            <!-- TypeScript Routing Engine Preview -->
+            <div class="pujopulse-code-block">
+<span style="color:#fb923c;">// PujoPulse Dynamic Pandal Router &amp; Crowd Penalty Engine</span>
+<span style="color:#f472b6;">export async function</span> <span style="color:#60a5fa;">calculateFestiveHopRoute</span>(
+    <span style="color:#a7f3d0;">userCoord</span>: <span style="color:#fde047;">GeoPoint</span>,
+    <span style="color:#a7f3d0;">preferences</span>: { <span style="color:#fde047;">circuit</span>: <span style="color:#fde047;">'North_Heritage'</span> | <span style="color:#fde047;">'South_Art'</span>, <span style="color:#fde047;">maxWaitMins</span>: <span style="color:#f472b6;">number</span> }
+): <span style="color:#fde047;">Promise</span>&lt;<span style="color:#34d399;">PandalRouteResult</span>&gt; {
+    <span style="color:#f472b6;">const</span> pandals = <span style="color:#f472b6;">await</span> <span style="color:#34d399;">GeoSpatialMesh</span>.<span style="color:#60a5fa;">queryRadius</span>(userCoord, <span style="color:#fde047;">5.0</span> <span style="color:#6ee7b7;">/* km */</span>);
+    <span style="color:#f472b6;">const</span> crowdHeatmap = <span style="color:#f472b6;">await</span> <span style="color:#34d399;">IoTTelemetry</span>.<span style="color:#60a5fa;">getLiveDensityMatrix</span>();
+    <span style="color:#f472b6;">return</span> <span style="color:#34d399;">PandalPathfinder</span>.<span style="color:#60a5fa;">solveOptimalHopTrail</span>(pandals, {
+        crowdPenalty: crowdHeatmap.<span style="color:#60a5fa;">getDensityCoeff</span>(),
+        metroProximityBonus: <span style="color:#fbbf24;">true</span>,
+        foodHubWaypoints: [<span style="color:#fde047;">"Kathi_Roll"</span>, <span style="color:#fde047;">"Puchka_Zone"</span>]
+    });
+}
+            </div>
+          </div>
+
+          <button class="pujopulse-action-btn" onclick="openPujoPulseModal(event)">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Launch Interactive Pandal Hop Explorer &amp; Live Telemetry</span>
+          </button>
+        </div>
+
         <!-- Review / Engineering Note Card -->
         <div class="glass-panel" style="padding: 24px;">
           <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-primary);">Engineering Spotlight &amp; Client Feedback</h3>
@@ -1283,6 +1771,7 @@
             <button class="cal-filter-tab" onclick="setCalFilter('microclog', this)">🟢 MicroCLog</button>
             <button class="cal-filter-tab" onclick="setCalFilter('senseconnect', this)">🔵 SenseConnect</button>
             <button class="cal-filter-tab" onclick="setCalFilter('cargopulse', this)">🟣 CargoPulse</button>
+            <button class="cal-filter-tab" onclick="setCalFilter('pujopulse', this)">🟠 PujoPulse</button>
           </div>
 
           <!-- Month & Year Label -->
@@ -1400,6 +1889,75 @@
     </div>
   </div>
 
+  <!-- PujoPulse Interactive Pandal Hopping Modal -->
+  <div class="pujo-modal-overlay" id="pujoModalOverlay" onclick="handlePujoModalBackdrop(event)">
+    <div class="pujo-modal-content" onclick="event.stopPropagation()">
+      <div class="pujo-modal-header">
+        <div class="pujo-modal-title-group">
+          <div class="pujo-modal-badge">
+            <span>🏮</span>
+            <span>Kolkata Sharodotsav Telemetry</span>
+          </div>
+          <h2 class="pujo-modal-title">
+            <span>PujoPulse Pandal Hop Navigator</span>
+          </h2>
+        </div>
+        <button class="pujo-modal-close-btn" onclick="closePujoPulseModal()" title="Close Explorer">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="pujo-modal-body">
+        <!-- Trail Circuit Tabs -->
+        <div>
+          <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Select Festive Circuit Trail</div>
+          <div class="pujo-circuit-tabs">
+            <button class="pujo-circuit-tab active" id="tabSouth" onclick="switchPujoCircuit('south')">🌟 South Kolkata Dazzle</button>
+            <button class="pujo-circuit-tab" id="tabNorth" onclick="switchPujoCircuit('north')">🏛️ North Kolkata Heritage</button>
+            <button class="pujo-circuit-tab" id="tabEast" onclick="switchPujoCircuit('east')">💎 East &amp; Salt Lake Circuit</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Circuit Info Banner -->
+        <div id="pujoCircuitBanner" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; color: #fde68a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div id="circuitBannerText">📍 South Kolkata Art Trail: 5 Iconic Pandals • Est. Trail Time: 2h 40m • Optimal Transit: Kolkata Metro Blue Line</div>
+          <div style="font-family: var(--font-mono); font-weight: 700; color: #4ade80;" id="circuitDensityStatus">🟢 Moderate Flow</div>
+        </div>
+
+        <!-- Pandals List -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Real-Time Pandal Queue Telemetry</div>
+            <div style="font-size: 0.72rem; color: var(--text-secondary);" id="pujoLiveUpdateTime">Refreshed: Just now</div>
+          </div>
+          <div class="pujo-pandal-list" id="pujoPandalList">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer Controls -->
+      <div class="pujo-modal-footer">
+        <div class="pujo-footer-actions">
+          <button class="pujo-control-btn" onclick="simulatePujoReRoute()">
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Simulate Rush &amp; Re-route</span>
+          </button>
+          <button class="pujo-control-btn" onclick="copyPujoItinerary()">
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Export Trail Itinerary</span>
+          </button>
+        </div>
+        <div>
+          <button class="pujo-control-btn pujo-audio-btn" id="pujoDhakBtn" onclick="togglePujoDhakAudio()">
+            <span id="dhakIcon">🥁</span>
+            <span id="dhakText">Play Dhak Festivity Beat</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* Handlers for project action buttons */
     function handleMicroCLogClick(e) {
@@ -1442,6 +2000,16 @@
         status: "Active Milestone"
       },
       {
+        year: 2026, month: 9, day: 16,
+        title: "PujoPulse Sharodotsav Telemetry Launch",
+        project: "pujopulse",
+        projectName: "PujoPulse AI",
+        tagClass: "cal-tag-pujopulse",
+        dotClass: "pujopulse",
+        desc: "Deploying geo-spatial crowd heat-mapping, 450+ pandal beacons, and live Kolkata Metro queue rerouting for Durga Puja.",
+        status: "Active Milestone"
+      },
+      {
         year: 2026, month: 9, day: 18,
         title: "SenseConnect Spatial Audio & Braille Stream",
         project: "senseconnect",
@@ -1449,6 +2017,16 @@
         tagClass: "cal-tag-senseconnect",
         dotClass: "senseconnect",
         desc: "Integration of 3D spatial audio beacons and low-latency tactile Braille matrix drivers for visually impaired users.",
+        status: "Upcoming"
+      },
+      {
+        year: 2026, month: 9, day: 20,
+        title: "PujoPulse Navami 3.5M Surge Stress-Test",
+        project: "pujopulse",
+        projectName: "PujoPulse AI",
+        tagClass: "cal-tag-pujopulse",
+        dotClass: "pujopulse",
+        desc: "High-concurrency stress test handling 3.5M concurrent pandal hoppers across North and South Kolkata festival corridors.",
         status: "Upcoming"
       },
       {
@@ -1776,6 +2354,375 @@
       document.getElementById("perfHoverLine").setAttribute("opacity", "0");
       document.getElementById("perfHoverCircle").setAttribute("opacity", "0");
       document.getElementById("perfTooltip").style.display = "none";
+    }
+
+    /* =========================================================================
+       PUJOPULSE PANDAL HOPPER AI & LIVE TELEMETRY ENGINE
+       ========================================================================= */
+    const PUJO_CIRCUITS = {
+      south: {
+        name: "South Kolkata Dazzle Circuit",
+        bannerText: "📍 South Kolkata Art Trail: 5 Iconic Pandals • Est. Trail Time: 2h 40m • Optimal Transit: Kolkata Metro Blue Line",
+        densityStatus: "🟢 Moderate Flow",
+        densityColor: "#4ade80",
+        pandals: [
+          {
+            name: "Ekdalia Evergreen Club",
+            area: "Gariahat / Ballygunge",
+            theme: "Iconic Sabeki Durga Idol & Grand German Chandelier",
+            metro: "Kalighat (Gate 2) / Gariahat Tram",
+            waitMins: 25,
+            densityPct: 65,
+            level: "med"
+          },
+          {
+            name: "Singhi Park Sarbojanin",
+            area: "Dover Lane",
+            theme: "Intricate Temple Architecture & Illumination Gates",
+            metro: "Kalighat / Gariahat Crossing",
+            waitMins: 20,
+            densityPct: 55,
+            level: "med"
+          },
+          {
+            name: "Suruchi Sangha",
+            area: "New Alipore",
+            theme: "Indian Heritage State Artistry & Eco-Craft Pratima",
+            metro: "Kalighat / Majerhat Hub",
+            waitMins: 35,
+            densityPct: 78,
+            level: "high"
+          },
+          {
+            name: "Mudiali Club",
+            area: "Southern Avenue",
+            theme: "Avant-Garde Architectural Installation & Laser Lighting",
+            metro: "Rabindra Sarobar (Gate 1)",
+            waitMins: 18,
+            densityPct: 45,
+            level: "low"
+          },
+          {
+            name: "Maddox Square",
+            area: "Ritchie Road / Ballygunge",
+            theme: "Traditional Sabeki Idol, Open-Air Youth Adda & Food Stalls",
+            metro: "Netaji Bhavan (Gate 3)",
+            waitMins: 10,
+            densityPct: 35,
+            level: "low"
+          }
+        ]
+      },
+      north: {
+        name: "North Kolkata Heritage Trail",
+        bannerText: "🏛️ North Kolkata Heritage Trail: 5 Historic Pujas • Est. Trail Time: 3h 10m • Optimal Transit: Kolkata Metro (Shyambazar / Sovabazar)",
+        densityStatus: "🟡 Active Surge",
+        densityColor: "#fbbf24",
+        pandals: [
+          {
+            name: "Bagbazar Sarbojanin",
+            area: "Bagbazar Ghat",
+            theme: "Century-Old Sabeki 'Daaker Saaj' Idol & Traditional Dhunuchi",
+            metro: "Shyambazar (Gate 2)",
+            waitMins: 22,
+            densityPct: 60,
+            level: "med"
+          },
+          {
+            name: "Sovabazar Rajbari",
+            area: "Sovabazar",
+            theme: "Historic 1757 Aristocratic Zamindar Courtyard Puja",
+            metro: "Sovabazar Sutanuti",
+            waitMins: 15,
+            densityPct: 42,
+            level: "low"
+          },
+          {
+            name: "Kumartuli Park",
+            area: "Kumartuli Potters' Colony",
+            theme: "Sculptors' Quarter Masterpiece & Modernist Kinetic Art",
+            metro: "Sovabazar Sutanuti (Gate 1)",
+            waitMins: 28,
+            densityPct: 72,
+            level: "med"
+          },
+          {
+            name: "College Square Sarbojanin",
+            area: "College Street",
+            theme: "Dazzling Water Tank Reflection Lighting & Illuminated Palace",
+            metro: "Central / MG Road",
+            waitMins: 32,
+            densityPct: 80,
+            level: "high"
+          },
+          {
+            name: "Ahiritola Sarbojanin",
+            area: "BK Paul Avenue",
+            theme: "Indigenous Terracotta Heritage & Village Handloom Motifs",
+            metro: "Sovabazar Sutanuti (Gate 3)",
+            waitMins: 14,
+            densityPct: 38,
+            level: "low"
+          }
+        ]
+      },
+      east: {
+        name: "East Kolkata & Salt Lake Circuit",
+        bannerText: "💎 East Kolkata & Salt Lake Circuit: 4 Monumental Hubs • Est. Trail Time: 2h 20m • Optimal Transit: Green Line Metro & VIP Road",
+        densityStatus: "🔴 Peak Congestion",
+        densityColor: "#f87171",
+        pandals: [
+          {
+            name: "Sreebhumi Sporting Club",
+            area: "Lake Town / VIP Road",
+            theme: "Grand World Monument Replica with Disneyland Illumination",
+            metro: "Ultadanga / VIP Road Feeder",
+            waitMins: 45,
+            densityPct: 92,
+            level: "high"
+          },
+          {
+            name: "FD Block Sarbojanin",
+            area: "Salt Lake Sector III",
+            theme: "Experimental Structural Marvel & Sensory Sound Installation",
+            metro: "Karunamoyee (Green Line)",
+            waitMins: 20,
+            densityPct: 52,
+            level: "med"
+          },
+          {
+            name: "BJ Block Salt Lake",
+            area: "Salt Lake Sector II",
+            theme: "Eco-Friendly Bamboo, Jute Craftwork & Peaceful Courtyard",
+            metro: "Central Park (Green Line)",
+            waitMins: 12,
+            densityPct: 36,
+            level: "low"
+          },
+          {
+            name: "Dum Dum Park Tarun Sangha",
+            area: "Dum Dum Park",
+            theme: "Surreal Contemporary Art, Kinetic Canvas & Social Parable",
+            metro: "Belgachia / VIP Road",
+            waitMins: 26,
+            densityPct: 68,
+            level: "med"
+          }
+        ]
+      }
+    };
+
+    let activePujoCircuit = 'south';
+
+    function openPujoPulseModal(e) {
+      if (e) e.preventDefault();
+      const modal = document.getElementById('pujoModalOverlay');
+      if (modal) {
+        modal.classList.add('active');
+        renderPujoCircuit();
+      }
+    }
+
+    function closePujoPulseModal() {
+      const modal = document.getElementById('pujoModalOverlay');
+      if (modal) modal.classList.remove('active');
+      stopPujoDhakAudio();
+    }
+
+    function handlePujoModalBackdrop(e) {
+      if (e.target.id === 'pujoModalOverlay') {
+        closePujoPulseModal();
+      }
+    }
+
+    function switchPujoCircuit(circuitKey) {
+      activePujoCircuit = circuitKey;
+      document.querySelectorAll('.pujo-circuit-tab').forEach(t => t.classList.remove('active'));
+      const activeTab = document.getElementById(`tab${circuitKey.charAt(0).toUpperCase() + circuitKey.slice(1)}`);
+      if (activeTab) activeTab.classList.add('active');
+      renderPujoCircuit();
+    }
+
+    function renderPujoCircuit() {
+      const circuit = PUJO_CIRCUITS[activePujoCircuit];
+      if (!circuit) return;
+
+      const bannerTextEl = document.getElementById('circuitBannerText');
+      if (bannerTextEl) bannerTextEl.textContent = circuit.bannerText;
+      const statusEl = document.getElementById('circuitDensityStatus');
+      if (statusEl) {
+        statusEl.textContent = circuit.densityStatus;
+        statusEl.style.color = circuit.densityColor;
+      }
+
+      const listEl = document.getElementById('pujoPandalList');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      circuit.pandals.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'pujo-pandal-item';
+
+        const waitPillClass = p.level === 'low' ? 'pujo-wait-low' : (p.level === 'med' ? 'pujo-wait-med' : 'pujo-wait-high');
+        const barFillColor = p.level === 'low' ? '#4ade80' : (p.level === 'med' ? '#fbbf24' : '#f87171');
+
+        item.innerHTML = `
+          <div class="pujo-pandal-index">${idx + 1}</div>
+          <div class="pujo-pandal-details">
+            <div class="pujo-pandal-name">${p.name}</div>
+            <div class="pujo-pandal-meta">
+              <span>📍 ${p.area}</span>
+              <span>🚇 ${p.metro}</span>
+              <span>✨ ${p.theme}</span>
+            </div>
+          </div>
+          <div class="pujo-pandal-status">
+            <span class="pujo-wait-pill ${waitPillClass}">⏳ ~${p.waitMins}m queue</span>
+            <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+              <span style="font-size: 0.65rem; color: var(--text-secondary);">${p.densityPct}%</span>
+              <div class="pujo-crowd-bar-bg">
+                <div class="pujo-crowd-bar-fill" style="width: ${p.densityPct}%; background: ${barFillColor};"></div>
+              </div>
+            </div>
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+
+      const now = new Date();
+      const updateEl = document.getElementById('pujoLiveUpdateTime');
+      if (updateEl) updateEl.textContent = `Refreshed: ${now.toLocaleTimeString()}`;
+    }
+
+    function simulatePujoReRoute() {
+      const circuit = PUJO_CIRCUITS[activePujoCircuit];
+      if (!circuit) return;
+
+      circuit.pandals.forEach(p => {
+        const delta = Math.floor((Math.random() - 0.45) * 10);
+        p.waitMins = Math.max(5, Math.min(65, p.waitMins + delta));
+        p.densityPct = Math.max(20, Math.min(98, Math.round(p.waitMins * 1.8 + Math.random() * 8)));
+        p.level = p.waitMins > 30 ? 'high' : (p.waitMins > 16 ? 'med' : 'low');
+      });
+
+      renderPujoCircuit();
+
+      const banner = document.getElementById('pujoCircuitBanner');
+      if (banner) {
+        banner.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.6)';
+        banner.style.borderColor = '#fbbf24';
+        setTimeout(() => {
+          banner.style.boxShadow = 'none';
+          banner.style.borderColor = 'rgba(245, 158, 11, 0.2)';
+        }, 700);
+      }
+    }
+
+    function copyPujoItinerary() {
+      const circuit = PUJO_CIRCUITS[activePujoCircuit];
+      if (!circuit) return;
+
+      let text = `🏮 PUJOPULSE HOP ITINERARY: ${circuit.name}\n${circuit.bannerText}\n\n`;
+      circuit.pandals.forEach((p, idx) => {
+        text += `${idx + 1}. ${p.name} (${p.area})\n   - Transit: ${p.metro}\n   - Est. Queue: ~${p.waitMins} mins (Density: ${p.densityPct}%)\n   - Highlight: ${p.theme}\n\n`;
+      });
+      text += `✨ Generated by PujoPulse Pandal Hopper AI (Aethelgard Engineering)`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert("📋 Pujo Hop Itinerary Copied!\n\nYour optimized pandal route with Metro stations and live queue estimates has been copied to your clipboard.");
+        }).catch(() => {
+          alert("📋 Pujo Hop Itinerary:\n\n" + text);
+        });
+      } else {
+        alert("📋 Pujo Hop Itinerary:\n\n" + text);
+      }
+    }
+
+    /* Web Audio API Dhak Festivity Synthesizer */
+    let pujoAudioCtx = null;
+    let pujoDhakInterval = null;
+    let isPujoDhakPlaying = false;
+    let dhakStep = 0;
+
+    function togglePujoDhakAudio() {
+      if (isPujoDhakPlaying) {
+        stopPujoDhakAudio();
+      } else {
+        startPujoDhakAudio();
+      }
+    }
+
+    function startPujoDhakAudio() {
+      try {
+        if (!pujoAudioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          pujoAudioCtx = new AudioContext();
+        }
+        if (pujoAudioCtx.state === 'suspended') {
+          pujoAudioCtx.resume();
+        }
+        isPujoDhakPlaying = true;
+        const btn = document.getElementById('pujoDhakBtn');
+        const txt = document.getElementById('dhakText');
+        if (btn) btn.classList.add('playing');
+        if (txt) txt.textContent = "Pause Dhak Beat";
+
+        dhakStep = 0;
+        pujoDhakInterval = setInterval(() => {
+          playDhakStep(dhakStep);
+          dhakStep = (dhakStep + 1) % 8;
+        }, 190);
+      } catch (err) {
+        console.warn("Web Audio not available:", err);
+      }
+    }
+
+    function stopPujoDhakAudio() {
+      isPujoDhakPlaying = false;
+      if (pujoDhakInterval) clearInterval(pujoDhakInterval);
+      const btn = document.getElementById('pujoDhakBtn');
+      const txt = document.getElementById('dhakText');
+      if (btn) btn.classList.remove('playing');
+      if (txt) txt.textContent = "Play Dhak Festivity Beat";
+    }
+
+    function playDhakStep(step) {
+      if (!pujoAudioCtx || pujoAudioCtx.state !== 'running') return;
+      const now = pujoAudioCtx.currentTime;
+
+      // Authentic 8-step Dhak rhythm
+      if (step === 0 || step === 2 || step === 5 || step === 7) {
+        const osc = pujoAudioCtx.createOscillator();
+        const gain = pujoAudioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(step === 0 ? 115 : 100, now);
+        osc.frequency.exponentialRampToValueAtTime(42, now + 0.16);
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.connect(gain);
+        gain.connect(pujoAudioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.19);
+      }
+
+      if (step === 0 || step === 3 || step === 4 || step === 6 || step === 7) {
+        const snapOsc = pujoAudioCtx.createOscillator();
+        const filter = pujoAudioCtx.createBiquadFilter();
+        const snapGain = pujoAudioCtx.createGain();
+        snapOsc.type = 'square';
+        snapOsc.frequency.setValueAtTime(800 + Math.random() * 200, now);
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(2200, now);
+        filter.Q.setValueAtTime(3, now);
+        snapGain.gain.setValueAtTime(0.18, now);
+        snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        snapOsc.connect(filter);
+        filter.connect(snapGain);
+        snapGain.connect(pujoAudioCtx.destination);
+        snapOsc.start(now);
+        snapOsc.stop(now + 0.06);
+      }
     }
 
     // Initialize widgets on load

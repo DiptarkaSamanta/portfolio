@@ -35,7 +35,7 @@
 | 📚 **Grand Library** | [`library.html`](library.html) | Technical publications, research blog posts, book notes, and AI/NLP academic documentation. |
 | 🎮 **Luna Park (Sandbox)** | [`playground.html`](playground.html) | Creative sandbox featuring the Interactive Digital Drawing Board Studio, Scanimation Live Video Demo & Mayor AI Tic-Tac-Toe Challenge. |
 | 🏪 **Port Market** | [`social_market.html`](social_market.html) | Social network booth containing GitHub, LeetCode, and LinkedIn links plus an interactive messaging form. |
-| ⚓ **Iron Wharf** | [`industry_port.html`](industry_port.html) | Engineering consultancy details, freelancing options, rate cards, and technical solutions packages. |
+| ⚓ **Iron Wharf** | [`industry_port.html`](industry_port.html) | Engineering consultancy details, freelancing options, rate cards, and technical solutions packages (MicroCLog, SenseConnect, CargoPulse, and PujoPulse Pandal Hopper AI). |
 
 ---
 

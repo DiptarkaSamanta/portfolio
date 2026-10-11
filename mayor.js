@@ -252,11 +252,21 @@ function generateClientMayorResponse(userText) {
     };
   }
 
+  if (query.includes('pujo') || query.includes('pandal') || query.includes('hop') || query.includes('durga')) {
+    return {
+      text: "🏮 **PujoPulse: Pandal Hop AI** is Diptarka's high-concurrency urban transit & crowd telemetry platform engineered for Kolkata's Durga Puja!\n\n• **Real-Time Crowd Mesh**: Live IoT heatmap tracking & queue wait estimations (< 12s refresh).\n• **Multi-Modal Transit**: Kolkata Metro Blue & Green lines integration, auto feeder routes, and walking corridors.\n• **Thematic Circuits**: North Kolkata Heritage (Bagbazar, Sovabazar), South Kolkata Art (Ekdalia, Suruchi, Maddox Square), and Salt Lake.\n• **Interactive Dhak Beat**: Procedural Web Audio synthesizer celebrating the Sharodotsav festival spirit.\n\nInspect the live telemetry explorer at the [Iron Wharf](industry_port.html)!",
+      choices: [
+        { text: "Visit Iron Wharf", url: "industry_port.html" }
+      ]
+    };
+  }
+
   if (query.includes('project') || query.includes('work') || query.includes('repo')) {
     return {
-      text: "Diptarka has built impressive AI/ML applications showcased at the [Stellar Observatory](observatory.html):\n\n• **Scanimation Studio**: Barrier-grid optical illusion generator powered by AI.\n• **Mayor AI Challenge**: Real-time neural island town hall chatbot.\n• **Aethelgard Island**: Glassmorphic digital portfolio platform.",
+      text: "Diptarka has built impressive AI/ML applications showcased across the island:\n\n• **Scanimation Studio**: Barrier-grid optical illusion generator powered by AI at the [Stellar Observatory](observatory.html).\n• **PujoPulse Pandal Hop AI**: Real-time Durga Puja crowd telemetry & transit navigator at the [Iron Wharf](industry_port.html).\n• **Mayor AI Challenge**: Real-time neural island town hall chatbot.\n• **Aethelgard Island**: Glassmorphic digital portfolio platform.",
       choices: [
-        { text: "Explore Observatory", url: "observatory.html" }
+        { text: "Explore Observatory", url: "observatory.html" },
+        { text: "Visit Iron Wharf", url: "industry_port.html" }
       ]
     };
   }

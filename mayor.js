@@ -30,8 +30,8 @@ Knowledge Base:
   4. Core Terminal: An interactive tech stack analyzer terminal. Link: [Core Terminal](code_terminal.html)
   5. Home / Manor: The personal quarters of Diptarka, containing biography, goals, values, and a downloadable resume. Link: [Home Manor](home.html)
   6. Grand Library: Contains technical publications, blog posts, books read, and academic notes. Link: [Grand Library](library.html)
-  7. Luna Park / Playground: A sandbox for interactive visual experiments, digital canvas sketching, and creative code. Features the Interactive Digital Drawing Board Studio, Mayor AI Tic-Tac-Toe, and the flagship Scanimation Studio Live Game Box (Barrier-Grid Optical Kinegrams). Link: [Luna Park Playground](playground.html)
-  Featured External App: Scanimation Studio - AI-Powered Barrier-Grid Optical Illusion Platform live at https://scanimation.onrender.com.
+  7. Luna Park / Playground: A sandbox for interactive visual experiments, digital canvas sketching, and creative code. Features Kanoodle 3D (Knoodles) Polysphere Puzzle, the Interactive Digital Drawing Board Studio, Mayor AI Tic-Tac-Toe, and the flagship Scanimation Studio Live Game Box (Barrier-Grid Optical Kinegrams). Link: [Luna Park Playground](playground.html)
+  Featured External Apps: Scanimation Studio (https://scanimation.onrender.com) and Kanoodle 3D (https://diptarkasamanta.github.io/Kanoodle/).
 
   8. Port Market / Social Market: Connect booth containing social links (GitHub, LeetCode, etc.) and a messaging form. Link: [Port Market](social_market.html)
   9. Iron Wharf / Industry & Port: Services, rate cards, consultancy options, and freelancing packages. Link: [Iron Wharf Services](industry_port.html)
@@ -238,6 +238,16 @@ function generateClientMayorResponse(userText) {
       choices: [
         { text: "Open Social Market", url: "social_market.html" },
         { text: "View Freelance Options", url: "industry_port.html" }
+      ]
+    };
+  }
+
+  if (query.includes('kanoodle') || query.includes('knoodle') || query.includes('knoodles') || query.includes('puzzle')) {
+    return {
+      text: "🧩 **Kanoodle 3D** (Knoodles) is Diptarka's tactile 3D WebGL puzzle game in [Luna Park / Playground](playground.html)!\n\n• **Core Mechanics**: 12 glossy polysphere candy pieces modeled with Three.js physical materials.\n• **Game Modes**: 2D Flat Tray (11×5), 5-Tier 3D Pyramid, and Custom Studio Designer.\n• **Exact-Cover Solver**: Knuth's Algorithm X (DLX) finds valid bead placements in <20ms for instant hints and auto-solving.\n• **Procedural Audio**: Tactile Web Audio synthesizer for marble drops, clacks, and victory fanfares.\n\nYou can launch the game online at [Kanoodle 3D Online](https://diptarkasamanta.github.io/Kanoodle/) or explore it in [Luna Park Playground](playground.html)!",
+      choices: [
+        { text: "Play Kanoodle 3D Online", url: "https://diptarkasamanta.github.io/Kanoodle/" },
+        { text: "Visit Luna Park", url: "playground.html" }
       ]
     };
   }

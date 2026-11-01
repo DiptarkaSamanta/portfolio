@@ -884,6 +884,45 @@
       justify-content: center;
       box-shadow: 0 0 8px rgba(14, 165, 233, 0.5);
     }
+    .kanoodle-hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(3, 7, 18, 0.55);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border-radius: 8px;
+      z-index: 5;
+    }
+    a:hover .kanoodle-hover-overlay {
+      opacity: 1;
+    }
+    .kanoodle-play-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #030712;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    @media (max-width: 880px) {
+      .games-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .mayor-challenge-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body class="accent-pink">
@@ -1179,8 +1218,65 @@
         </div>
       </section>
 
-      <!-- GAME 2: MAYOR AI CHALLENGE (TIC-TAC-TOE) -->
-      <section class="glass-panel" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+      <!-- GAME 2: KANOODLE 3D PUZZLE GAME (KNOODLES) -->
+      <section class="glass-panel" id="kanoodleBox" style="padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; border: 1px solid rgba(245, 158, 11, 0.35); background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.12), rgba(10, 15, 30, 0.92)); border-radius: 16px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span class="scanimation-badge" style="background: linear-gradient(135deg, #f59e0b, #ec4899); font-size: 0.65rem; padding: 3px 8px; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">3D PUZZLE GAME</span>
+            <span class="scanimation-badge-live" style="font-size: 0.65rem; color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.15);">
+              <span style="display: inline-block; width: 6px; height: 6px; background: #fbbf24; border-radius: 50%; box-shadow: 0 0 8px #fbbf24; margin-right: 4px;"></span>
+              PLAYABLE ONLINE
+            </span>
+          </div>
+          <h2 style="font-size: 1.35rem; margin: 2px 0 4px 0; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px;">
+            🧩 Kanoodle 3D <span style="font-size: 0.72rem; color: #f59e0b; font-weight: 600; font-family: var(--font-mono);">(Knoodles)</span>
+          </h2>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.35; margin-bottom: 10px;">
+            Tactile 3D polysphere puzzle with candy lacquer physical materials. Features 2D flat tray, 3D pyramid, and Knuth's Algorithm X exact-cover solver.
+          </p>
+        </div>
+
+        <!-- Kanoodle Interactive Image Viewport (Clickable Link to GitHub Pages) -->
+        <div style="background: rgba(3,7,18,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 6px; display: flex; flex-direction: column; align-items: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.8);">
+          <a href="https://diptarkasamanta.github.io/Kanoodle/" target="_blank" rel="noopener noreferrer" style="position: relative; aspect-ratio: 16/9; width: 100%; max-height: 195px; border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 4px 16px rgba(0,0,0,0.6); display: block; text-decoration: none;" title="Click to play Kanoodle 3D online">
+            <div class="scanimation-overlay-hud" style="z-index: 10;">
+              <span class="hud-chip" style="font-size: 0.6rem; padding: 2px 8px; color: #fbbf24; font-weight: 700;">🧩 12 3D PIECES</span>
+              <span class="hud-chip" style="font-size: 0.6rem; color: #38bdf8;">⚡ ALGORITHM X</span>
+            </div>
+            <img src="images/kanoodle_screenshot.png" alt="Kanoodle 3D Puzzle Game Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; transition: transform 0.3s ease;">
+            <div class="kanoodle-hover-overlay">
+              <span class="kanoodle-play-badge">
+                <span>▶ Play Online</span>
+                <svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+              </span>
+            </div>
+          </a>
+          <div style="font-size: 0.68rem; color: var(--text-secondary); margin-top: 6px; text-align: center;">
+            🧩 <strong>Live Kanoodle 3D:</strong> 2D Tray • 3D Pyramid • Custom Studio • Solver
+          </div>
+        </div>
+
+        <!-- Controls: Quick Feature Row & Direct Launch Link Button -->
+        <div>
+          <div class="scrub-row" style="padding: 6px 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--text-secondary);">
+            <span style="display: flex; align-items: center; gap: 4px;"><span>🍬</span> <span>Glossy 3D</span></span>
+            <span style="display: flex; align-items: center; gap: 4px;"><span>📐</span> <span>Pyramid</span></span>
+            <span style="display: flex; align-items: center; gap: 4px; color: #38bdf8;"><span>⚡</span> <span>Solver</span></span>
+          </div>
+
+          <!-- Launch Full Game Link Button -->
+          <a href="https://diptarkasamanta.github.io/Kanoodle/" target="_blank" rel="noopener noreferrer" class="scanimation-launch-btn" style="width: 100%; justify-content: center; padding: 10px; font-size: 0.82rem; font-weight: 700; background: linear-gradient(135deg, #f59e0b, #d97706); border-color: rgba(251, 191, 36, 0.4); box-shadow: 0 0 15px rgba(245, 158, 11, 0.35); color: #030712;">
+            <span>🚀 Play Kanoodle 3D Online</span>
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- GAME 3: MAYOR AI CHALLENGE (TIC-TAC-TOE) -->
+    <section class="glass-panel mayor-challenge-card" style="padding: 24px; margin-bottom: 30px;">
+      <div class="mayor-challenge-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: center;">
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <span class="scanimation-badge" style="background: linear-gradient(135deg, #ec4899, #a855f7); font-size: 0.65rem; padding: 3px 8px;">AI STRATEGY GAME</span>
@@ -1203,7 +1299,12 @@
             </div>
           </div>
 
-          <div class="game-board" id="gameBoard" style="margin: 10px auto; max-width: 260px;">
+          <div class="status-banner" id="gameStatus" style="margin-top: 6px; font-size: 0.9rem;">Your Turn!</div>
+          <button class="reset-btn" onclick="resetGame()" style="margin-top: 10px; padding: 10px;">Reset Board</button>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <div class="game-board" id="gameBoard" style="margin: 0; max-width: 260px; width: 100%;">
             <div class="game-cell" data-index="0" onclick="makeMove(0)" style="height: 75px; font-size: 1.8rem;"></div>
             <div class="game-cell" data-index="1" onclick="makeMove(1)" style="height: 75px; font-size: 1.8rem;"></div>
             <div class="game-cell" data-index="2" onclick="makeMove(2)" style="height: 75px; font-size: 1.8rem;"></div>
@@ -1215,14 +1316,8 @@
             <div class="game-cell" data-index="8" onclick="makeMove(8)" style="height: 75px; font-size: 1.8rem;"></div>
           </div>
         </div>
-
-        <div>
-          <div class="status-banner" id="gameStatus" style="margin-top: 10px; font-size: 0.9rem;">Your Turn!</div>
-          <button class="reset-btn" onclick="resetGame()" style="margin-top: 10px; padding: 8px;">Reset Board</button>
-        </div>
-      </section>
-
-    </div>
+      </div>
+    </section>
 
     <!-- ========================================================= -->
     <!-- INTERACTIVE DIGITAL DRAWING BOARD STUDIO                  -->
@@ -1681,9 +1776,10 @@
     <section class="glass-panel" style="padding: 24px; margin-bottom: 30px;">
       <h3 style="font-size: 1.2rem; margin-bottom: 12px; font-weight: 600;">Creative Sandbox & Incubator</h3>
       <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 15px;">
-        The Playground functions as a development incubator where I test and refine user-interaction prototypes, Web Audio APIs, barrier-grid optical physics, and lightweight logic gates.
+        The Playground functions as a development incubator where I test and refine user-interaction prototypes, Web Audio APIs, barrier-grid optical physics, and exact-cover algorithm engines.
       </p>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; font-size: 0.85rem; color: var(--text-secondary);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; font-size: 0.85rem; color: var(--text-secondary);">
+        <div>🧩 <strong>Knuth's Algorithm X:</strong> Kanoodle 3D exact-cover solver computing bead placements in &lt;20ms.</div>
         <div>🧠 <strong>Minimax Deciders:</strong> Mayor's AI uses an adaptive weight algorithm.</div>
         <div>🎞️ <strong>Barrier-Grid Optics:</strong> Interlaced canvas graphics with real-time grating sliders.</div>
         <div>🎵 <strong>Audio Sweeps:</strong> Moves and interactions generate pure Sine wave sound nodes.</div>

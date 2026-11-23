@@ -271,6 +271,16 @@ function generateClientMayorResponse(userText) {
     };
   }
 
+  if (query.includes('resume') || query.includes('cv') || query.includes('education') || query.includes('cgpa') || query.includes('iem') || query.includes('college')) {
+    return {
+      text: "Diptarka Samanta is pursuing B.Tech in CSE (AI & ML) at **IEM Kolkata** with a **9.5/10 CGPA**!\n\n• **Direct Download**: You can download his official [Resume (PDF)](Diptarka_Samanta_CV.pdf) directly.\n• **Home Manor**: Explore his bio, core values, installed skills, and fast statistics at [Home Manor](home.html).\n• **LinkedIn**: Connect with Diptarka at [linkedin.com/in/diptarka-samanta](https://linkedin.com/in/diptarka-samanta).",
+      choices: [
+        { text: "Download CV (PDF)", url: "Diptarka_Samanta_CV.pdf" },
+        { text: "Visit Home Manor", url: "home.html" }
+      ]
+    };
+  }
+
   if (query.includes('project') || query.includes('work') || query.includes('repo')) {
     return {
       text: "Diptarka has built impressive AI/ML applications showcased across the island:\n\n• **Scanimation Studio**: Barrier-grid optical illusion generator powered by AI at the [Stellar Observatory](observatory.html).\n• **PujoPulse Pandal Hop AI**: Real-time Durga Puja crowd telemetry & transit navigator at the [Iron Wharf](industry_port.html).\n• **Mayor AI Challenge**: Real-time neural island town hall chatbot.\n• **Aethelgard Island**: Glassmorphic digital portfolio platform.",
